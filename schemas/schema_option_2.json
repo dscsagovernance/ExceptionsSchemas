@@ -1,0 +1,102 @@
+{
+  "$defs": {
+    "BaseModel": {
+      "properties": {},
+      "title": "BaseModel",
+      "type": "object"
+    },
+    "SenderInformation": {
+      "properties": {
+        "sender_vp": {
+          "title": "Sender Vp",
+          "type": "string"
+        },
+        "sender_gln": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sender Gln"
+        },
+        "sender_email": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sender Email"
+        },
+        "sender_phone": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sender Phone"
+        }
+      },
+      "required": [
+        "sender_vp"
+      ],
+      "title": "SenderInformation",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "po_number": {
+      "title": "Po Number",
+      "type": "string"
+    },
+    "sender_information": {
+      "$ref": "#/$defs/SenderInformation"
+    },
+    "master_data_errors": {
+      "additionalProperties": {
+        "$ref": "#/$defs/BaseModel"
+      },
+      "title": "Master Data Errors",
+      "type": "object"
+    },
+    "exceptions": {
+      "additionalProperties": {
+        "$ref": "#/$defs/BaseModel"
+      },
+      "title": "Exceptions",
+      "type": "object"
+    },
+    "other_errors": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Other Errors"
+    }
+  },
+  "required": [
+    "po_number",
+    "sender_information"
+  ],
+  "title": "ExceptionReport",
+  "type": "object"
+}

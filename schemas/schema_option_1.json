@@ -1,0 +1,178 @@
+{
+  "$defs": {
+    "BaseModel": {
+      "properties": {},
+      "title": "BaseModel",
+      "type": "object"
+    },
+    "EPCISNoProductDescription": {
+      "properties": {
+        "file_id": {
+          "title": "File Id",
+          "type": "string"
+        },
+        "product_gtin": {
+          "title": "Product Gtin",
+          "type": "string"
+        },
+        "product_serial": {
+          "title": "Product Serial",
+          "type": "string"
+        },
+        "resolution_request": {
+          "$ref": "#/$defs/ResolutionRequest"
+        }
+      },
+      "required": [
+        "file_id",
+        "product_gtin",
+        "product_serial",
+        "resolution_request"
+      ],
+      "title": "EPCISNoProductDescription",
+      "type": "object"
+    },
+    "EPCISStatus": {
+      "enum": [
+        "Ok",
+        "Syntax error",
+        "Not received",
+        "Other errors"
+      ],
+      "title": "EPCISStatus",
+      "type": "string"
+    },
+    "ObservationSource": {
+      "enum": [
+        "Scan",
+        "Packing Slip",
+        "ASN",
+        "Other"
+      ],
+      "title": "ObservationSource",
+      "type": "string"
+    },
+    "ProductNoEPCISDescription": {
+      "properties": {
+        "product_gtin": {
+          "title": "Product Gtin",
+          "type": "string"
+        },
+        "observation_source": {
+          "$ref": "#/$defs/ObservationSource"
+        },
+        "resolution_request": {
+          "$ref": "#/$defs/ResolutionRequest"
+        }
+      },
+      "required": [
+        "product_gtin",
+        "observation_source",
+        "resolution_request"
+      ],
+      "title": "ProductNoEPCISDescription",
+      "type": "object"
+    },
+    "ResolutionRequest": {
+      "enum": [
+        "Send data",
+        "Send product",
+        "Return product",
+        "Send back product"
+      ],
+      "title": "ResolutionRequest",
+      "type": "string"
+    },
+    "SenderInformation": {
+      "properties": {
+        "sender_vp": {
+          "title": "Sender Vp",
+          "type": "string"
+        },
+        "sender_gln": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sender Gln"
+        },
+        "sender_email": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sender Email"
+        },
+        "sender_phone": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sender Phone"
+        }
+      },
+      "required": [
+        "sender_vp"
+      ],
+      "title": "SenderInformation",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "po_number": {
+      "title": "Po Number",
+      "type": "string"
+    },
+    "data_status": {
+      "$ref": "#/$defs/EPCISStatus"
+    },
+    "product_no_data": {
+      "items": {
+        "$ref": "#/$defs/ProductNoEPCISDescription"
+      },
+      "title": "Product No Data",
+      "type": "array"
+    },
+    "data_no_product": {
+      "items": {
+        "$ref": "#/$defs/EPCISNoProductDescription"
+      },
+      "title": "Data No Product",
+      "type": "array"
+    },
+    "master_data_errors": {
+      "additionalProperties": {
+        "$ref": "#/$defs/BaseModel"
+      },
+      "title": "Master Data Errors",
+      "type": "object"
+    },
+    "sender_information": {
+      "$ref": "#/$defs/SenderInformation"
+    }
+  },
+  "required": [
+    "po_number",
+    "data_status",
+    "product_no_data",
+    "data_no_product",
+    "sender_information"
+  ],
+  "title": "ExceptionReport",
+  "type": "object"
+}
