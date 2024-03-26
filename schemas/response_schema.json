@@ -1,0 +1,150 @@
+{
+  "$defs": {
+    "AlternativeResolution": {
+      "properties": {
+        "alternative_resolution": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Resolution"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "follow_up": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FollowUpMethod"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "follow_up_details": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Follow Up Details"
+        }
+      },
+      "required": [
+        "alternative_resolution",
+        "follow_up"
+      ],
+      "title": "AlternativeResolution",
+      "type": "object"
+    },
+    "FollowUpMethod": {
+      "enum": [
+        "Email",
+        "Phone"
+      ],
+      "title": "FollowUpMethod",
+      "type": "string"
+    },
+    "Resolution": {
+      "enum": [
+        "Send new data",
+        "Send product",
+        "Return product",
+        "Send back product",
+        "Credit account",
+        "Debit account"
+      ],
+      "title": "Resolution",
+      "type": "string"
+    },
+    "ResolutionResponse": {
+      "enum": [
+        "Accept",
+        "Reject"
+      ],
+      "title": "ResolutionResponse",
+      "type": "string"
+    },
+    "ResponseItem": {
+      "properties": {
+        "exception_item_uuid": {
+          "title": "Exception Item Uuid",
+          "type": "string"
+        },
+        "resolution_response": {
+          "$ref": "#/$defs/ResolutionResponse"
+        },
+        "comments": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Comments"
+        },
+        "alternative_resolution": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AlternativeResolution"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "exception_item_uuid",
+        "resolution_response"
+      ],
+      "title": "ResponseItem",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "exception_uuid": {
+      "title": "Exception Uuid",
+      "type": "string"
+    },
+    "po_number": {
+      "title": "Po Number",
+      "type": "string"
+    },
+    "response_items": {
+      "items": {
+        "$ref": "#/$defs/ResponseItem"
+      },
+      "title": "Response Items",
+      "type": "array"
+    },
+    "additional_notes": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Additional Notes"
+    }
+  },
+  "required": [
+    "exception_uuid",
+    "po_number",
+    "response_items"
+  ],
+  "title": "ExceptionResponse",
+  "type": "object"
+}

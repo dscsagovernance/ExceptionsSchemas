@@ -1,0 +1,339 @@
+{
+  "$defs": {
+    "ContactInformation": {
+      "properties": {
+        "vp": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Vp"
+        },
+        "gln": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gln"
+        },
+        "email": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Email"
+        },
+        "phone": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Phone"
+        }
+      },
+      "title": "ContactInformation",
+      "type": "object"
+    },
+    "EPCISNoProductDescription": {
+      "properties": {
+        "exception_item_uuid": {
+          "title": "Exception Item Uuid",
+          "type": "string"
+        },
+        "file_id": {
+          "title": "File Id",
+          "type": "string"
+        },
+        "product_gtin": {
+          "title": "Product Gtin",
+          "type": "string"
+        },
+        "product_serial": {
+          "title": "Product Serial",
+          "type": "string"
+        },
+        "resolution_request": {
+          "$ref": "#/$defs/Resolution"
+        }
+      },
+      "required": [
+        "exception_item_uuid",
+        "file_id",
+        "product_gtin",
+        "product_serial",
+        "resolution_request"
+      ],
+      "title": "EPCISNoProductDescription",
+      "type": "object"
+    },
+    "Exceptions": {
+      "properties": {
+        "missing_data": {
+          "items": {
+            "$ref": "#/$defs/ProductNoEPCISDescription"
+          },
+          "title": "Missing Data",
+          "type": "array"
+        },
+        "missing_product": {
+          "items": {
+            "$ref": "#/$defs/EPCISNoProductDescription"
+          },
+          "title": "Missing Product",
+          "type": "array"
+        },
+        "overages": {
+          "items": {
+            "$ref": "#/$defs/OveragesUnderages"
+          },
+          "title": "Overages",
+          "type": "array"
+        },
+        "underages": {
+          "items": {
+            "$ref": "#/$defs/OveragesUnderages"
+          },
+          "title": "Underages",
+          "type": "array"
+        }
+      },
+      "title": "Exceptions",
+      "type": "object"
+    },
+    "GLNError": {
+      "properties": {
+        "exception_item_uuid": {
+          "title": "Exception Item Uuid",
+          "type": "string"
+        },
+        "invalid_gln": {
+          "title": "Invalid Gln",
+          "type": "string"
+        },
+        "proposed_gln": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Proposed Gln"
+        }
+      },
+      "required": [
+        "exception_item_uuid",
+        "invalid_gln"
+      ],
+      "title": "GLNError",
+      "type": "object"
+    },
+    "GTINError": {
+      "properties": {
+        "exception_item_uuid": {
+          "title": "Exception Item Uuid",
+          "type": "string"
+        },
+        "invalid_gtin": {
+          "title": "Invalid Gtin",
+          "type": "string"
+        },
+        "proposed_gtin": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Proposed Gtin"
+        }
+      },
+      "required": [
+        "exception_item_uuid",
+        "invalid_gtin"
+      ],
+      "title": "GTINError",
+      "type": "object"
+    },
+    "MasterDataErrors": {
+      "properties": {
+        "gln_errors": {
+          "$ref": "#/$defs/GLNError"
+        },
+        "gtin_errors": {
+          "$ref": "#/$defs/GTINError"
+        }
+      },
+      "title": "MasterDataErrors",
+      "type": "object"
+    },
+    "ObservationSource": {
+      "enum": [
+        "Scan",
+        "Packing Slip",
+        "ASN",
+        "Other"
+      ],
+      "title": "ObservationSource",
+      "type": "string"
+    },
+    "OveragesUnderages": {
+      "properties": {
+        "exception_item_uuid": {
+          "title": "Exception Item Uuid",
+          "type": "string"
+        },
+        "gtin": {
+          "title": "Gtin",
+          "type": "string"
+        },
+        "quantity_ordered": {
+          "title": "Quantity Ordered",
+          "type": "integer"
+        },
+        "quantity_received": {
+          "title": "Quantity Received",
+          "type": "integer"
+        },
+        "resolution_request": {
+          "$ref": "#/$defs/Resolution"
+        }
+      },
+      "required": [
+        "exception_item_uuid",
+        "gtin",
+        "quantity_ordered",
+        "quantity_received",
+        "resolution_request"
+      ],
+      "title": "OveragesUnderages",
+      "type": "object"
+    },
+    "ProductNoEPCISDescription": {
+      "properties": {
+        "exception_item_uuid": {
+          "title": "Exception Item Uuid",
+          "type": "string"
+        },
+        "product_gtin": {
+          "title": "Product Gtin",
+          "type": "string"
+        },
+        "observation_source": {
+          "$ref": "#/$defs/ObservationSource"
+        },
+        "resolution_request": {
+          "$ref": "#/$defs/Resolution"
+        },
+        "product_serial": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Product Serial"
+        }
+      },
+      "required": [
+        "exception_item_uuid",
+        "product_gtin",
+        "observation_source",
+        "resolution_request"
+      ],
+      "title": "ProductNoEPCISDescription",
+      "type": "object"
+    },
+    "Resolution": {
+      "enum": [
+        "Send new data",
+        "Send product",
+        "Return product",
+        "Send back product",
+        "Credit account",
+        "Debit account"
+      ],
+      "title": "Resolution",
+      "type": "string"
+    }
+  },
+  "properties": {
+    "exception_uuid": {
+      "title": "Exception Uuid",
+      "type": "string"
+    },
+    "po_number": {
+      "title": "Po Number",
+      "type": "string"
+    },
+    "sender_information": {
+      "$ref": "#/$defs/ContactInformation"
+    },
+    "master_data_errors": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/MasterDataErrors"
+        }
+      ],
+      "default": {}
+    },
+    "exceptions": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/Exceptions"
+        }
+      ],
+      "default": {}
+    },
+    "other_errors": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Other Errors"
+    }
+  },
+  "required": [
+    "exception_uuid",
+    "po_number",
+    "sender_information"
+  ],
+  "title": "ExceptionReport",
+  "type": "object"
+}
