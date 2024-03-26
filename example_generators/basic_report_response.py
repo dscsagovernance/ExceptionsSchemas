@@ -3,6 +3,7 @@ import sys
 from pathlib import Path
 import uuid
 import time
+import random
 
 current_file_path = Path(__file__).resolve()  
 project_root = current_file_path.parent.parent  
@@ -21,41 +22,41 @@ from data_models.exception_data_model import (
 namespace = uuid.NAMESPACE_DNS
 
 # Define the name (this is a string that you provide)
-name = 'example.com'
 
 
-case_uuid = str(uuid.uuid5(namespace, name))
+
+case_uuid = str(uuid.uuid5(namespace, str(random.random())))
 report_time = int(time.time())
 response_time = report_time + 3600
 report_2_time = response_time + 3600
 po_number = 'PO123456789'
 
-gln_uuid = str(uuid.uuid5(namespace, name))
-gtin_uuid = str(uuid.uuid5(namespace, name))
+gln_uuid = str(uuid.uuid5(namespace, str(random.random())))
+gtin_uuid = str(uuid.uuid5(namespace, str(random.random())))
 invalid_gtin = '12345678901234'
 new_gtin = '12345678909876'
 invalid_gln = '123456789'
 new_gln = '123456780'
 
 
-pnd_uuid = str(uuid.uuid5(namespace, name))
+pnd_uuid = str(uuid.uuid5(namespace, str(random.random())))
 
-dnp_uuid = str(uuid.uuid5(namespace, name))
+dnp_uuid = str(uuid.uuid5(namespace, str(random.random())))
 dnp_gtin = '01234567890123'
 dnp_serial = '12121212121212'
 
-overage_uuid = str(uuid.uuid5(namespace, name))
+overage_uuid = str(uuid.uuid5(namespace, str(random.random())))
 overage_gtin = '23456789012345'
 
-underage_uuid = str(uuid.uuid5(namespace, name))
+underage_uuid = str(uuid.uuid5(namespace, str(random.random())))
 underage_gtin = '23456789012344'
 
-report_message_uuid = str(uuid.uuid5(namespace, name))
+report_message_uuid = str(uuid.uuid5(namespace, str(random.random())))
 po_number = 'ABD1234'
 
-response_message_uuid = str(uuid.uuid5(namespace, name))
+response_message_uuid = str(uuid.uuid5(namespace, str(random.random())))
 
-report_2_message_uuid = str(uuid.uuid5(namespace, name))
+report_2_message_uuid = str(uuid.uuid5(namespace, str(random.random())))
 
 
 # Create an example of every class with fictional data

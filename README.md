@@ -7,9 +7,9 @@ Uses Pydantic to build a JSON schema from a data model for exceptions https://do
 ### Wholesaler reports an exception
 ```
 {
-  "message_uuid": "cfbff0d1-9375-5685-968c-48ce8b15ae17",
-  "exception_case_uuid": "cfbff0d1-9375-5685-968c-48ce8b15ae17",
-  "timestamp": 1711488776,
+  "message_uuid": "36424d90-ae99-5d7f-a244-ffccee08dabf",
+  "exception_case_uuid": "2dbf3d13-e539-5e86-a43f-3ef49bc08c5d",
+  "timestamp": 1711495403,
   "po_number": "ABD1234",
   "sender_information": {
     "vp": "jwt...",
@@ -20,7 +20,7 @@ Uses Pydantic to build a JSON schema from a data model for exceptions https://do
   "exceptions": {
     "missing_data": [
       {
-        "exception_item_uuid": "cfbff0d1-9375-5685-968c-48ce8b15ae17",
+        "exception_item_uuid": "909df5e2-fb8a-5330-bd1a-dcd6efd658fa",
         "product_gtin": "12345678901234",
         "observation_source": "Packing Slip",
         "resolution_request": "Send new data",
@@ -29,7 +29,7 @@ Uses Pydantic to build a JSON schema from a data model for exceptions https://do
     ],
     "missing_product": [
       {
-        "exception_item_uuid": "cfbff0d1-9375-5685-968c-48ce8b15ae17",
+        "exception_item_uuid": "3af38480-4fd4-50a2-bade-1df2d4e88601",
         "file_id": "file-123.xml",
         "product_gtin": "01234567890123",
         "product_serial": "12121212121212",
@@ -38,7 +38,7 @@ Uses Pydantic to build a JSON schema from a data model for exceptions https://do
     ],
     "overages": [
       {
-        "exception_item_uuid": "cfbff0d1-9375-5685-968c-48ce8b15ae17",
+        "exception_item_uuid": "e90ae12e-9fc7-5bf4-b686-657660af9918",
         "gtin": "23456789012345",
         "quantity_ordered": 100,
         "quantity_received": 110,
@@ -47,7 +47,7 @@ Uses Pydantic to build a JSON schema from a data model for exceptions https://do
     ],
     "underages": [
       {
-        "exception_item_uuid": "cfbff0d1-9375-5685-968c-48ce8b15ae17",
+        "exception_item_uuid": "53a7fbda-f1ab-5679-8195-0c057a050434",
         "gtin": "23456789012344",
         "quantity_ordered": 100,
         "quantity_received": 90,
@@ -57,7 +57,7 @@ Uses Pydantic to build a JSON schema from a data model for exceptions https://do
     "master_data_errors": {
       "gln_errors": [
         {
-          "exception_item_uuid": "cfbff0d1-9375-5685-968c-48ce8b15ae17",
+          "exception_item_uuid": "959fe743-ed76-5b28-87ff-c58ac36e5eb2",
           "invalid_gln": "123456789",
           "proposed_gln": "123456780",
           "resolution_request": null
@@ -65,7 +65,7 @@ Uses Pydantic to build a JSON schema from a data model for exceptions https://do
       ],
       "gtin_errors": [
         {
-          "exception_item_uuid": "cfbff0d1-9375-5685-968c-48ce8b15ae17",
+          "exception_item_uuid": "f3febc18-3a11-58c4-99e4-4e6631c864f3",
           "invalid_gtin": "12345678901234",
           "proposed_gtin": "12345678909876",
           "resolution_request": null
@@ -82,9 +82,9 @@ Uses Pydantic to build a JSON schema from a data model for exceptions https://do
 ### Manufacturer reponds to the exceptions
 ```
 {
-  "message_uuid": "cfbff0d1-9375-5685-968c-48ce8b15ae17",
-  "exception_case_uuid": "cfbff0d1-9375-5685-968c-48ce8b15ae17",
-  "timestamp": 1711492376,
+  "message_uuid": "ca5ce291-fad2-5e78-ba45-ee3d310d7d3b",
+  "exception_case_uuid": "2dbf3d13-e539-5e86-a43f-3ef49bc08c5d",
+  "timestamp": 1711499003,
   "sender_information": {
     "vp": "jwt...",
     "gln": "1234567890124",
@@ -94,13 +94,13 @@ Uses Pydantic to build a JSON schema from a data model for exceptions https://do
   "po_number": "ABD1234",
   "response_items": [
     {
-      "exception_item_uuid": "cfbff0d1-9375-5685-968c-48ce8b15ae17",
+      "exception_item_uuid": "909df5e2-fb8a-5330-bd1a-dcd6efd658fa",
       "resolution_response": "Accept",
       "comments": "Accepted the missing data issue.",
       "alternative_resolution": null
     },
     {
-      "exception_item_uuid": "cfbff0d1-9375-5685-968c-48ce8b15ae17",
+      "exception_item_uuid": "3af38480-4fd4-50a2-bade-1df2d4e88601",
       "resolution_response": "Accept",
       "comments": "Shipped product already on it's way, no account credit needed.",
       "alternative_resolution": {
@@ -110,25 +110,25 @@ Uses Pydantic to build a JSON schema from a data model for exceptions https://do
       }
     },
     {
-      "exception_item_uuid": "cfbff0d1-9375-5685-968c-48ce8b15ae17",
+      "exception_item_uuid": "e90ae12e-9fc7-5bf4-b686-657660af9918",
       "resolution_response": "Accept",
       "comments": "Accepted the overage issue.",
       "alternative_resolution": null
     },
     {
-      "exception_item_uuid": "cfbff0d1-9375-5685-968c-48ce8b15ae17",
+      "exception_item_uuid": "53a7fbda-f1ab-5679-8195-0c057a050434",
       "resolution_response": "Accept",
       "comments": "Accepted the underage issue.",
       "alternative_resolution": null
     },
     {
-      "exception_item_uuid": "cfbff0d1-9375-5685-968c-48ce8b15ae17",
+      "exception_item_uuid": "53a7fbda-f1ab-5679-8195-0c057a050434",
       "resolution_response": "Accept",
       "comments": "Accepted the gln issue.",
       "alternative_resolution": null
     },
     {
-      "exception_item_uuid": "cfbff0d1-9375-5685-968c-48ce8b15ae17",
+      "exception_item_uuid": "f3febc18-3a11-58c4-99e4-4e6631c864f3",
       "resolution_response": "Accept",
       "comments": "Accepted the gtin issue.",
       "alternative_resolution": null
@@ -140,9 +140,9 @@ Uses Pydantic to build a JSON schema from a data model for exceptions https://do
 ### Wholesaler responds saying all is ok
 ```
 {
-  "message_uuid": "cfbff0d1-9375-5685-968c-48ce8b15ae17",
-  "exception_case_uuid": "cfbff0d1-9375-5685-968c-48ce8b15ae17",
-  "timestamp": 1711495976,
+  "message_uuid": "61c72ff1-8b9b-504f-b460-cbaf4c83020a",
+  "exception_case_uuid": "2dbf3d13-e539-5e86-a43f-3ef49bc08c5d",
+  "timestamp": 1711502603,
   "po_number": "ABD1234",
   "sender_information": {
     "vp": "jwt...",
