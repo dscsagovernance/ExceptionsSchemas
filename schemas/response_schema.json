@@ -42,6 +42,55 @@
       "title": "AlternativeResolution",
       "type": "object"
     },
+    "ContactInformation": {
+      "properties": {
+        "vp": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Vp"
+        },
+        "gln": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gln"
+        },
+        "email": {
+          "title": "Email",
+          "type": "string"
+        },
+        "phone": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Phone"
+        }
+      },
+      "required": [
+        "email"
+      ],
+      "title": "ContactInformation",
+      "type": "object"
+    },
     "FollowUpMethod": {
       "enum": [
         "Email",
@@ -112,9 +161,20 @@
     }
   },
   "properties": {
-    "exception_uuid": {
-      "title": "Exception Uuid",
+    "message_uuid": {
+      "title": "Message Uuid",
       "type": "string"
+    },
+    "exception_case_uuid": {
+      "title": "Exception Case Uuid",
+      "type": "string"
+    },
+    "timestamp": {
+      "title": "Timestamp",
+      "type": "integer"
+    },
+    "sender_information": {
+      "$ref": "#/$defs/ContactInformation"
     },
     "po_number": {
       "title": "Po Number",
@@ -149,7 +209,10 @@
     }
   },
   "required": [
-    "exception_uuid",
+    "message_uuid",
+    "exception_case_uuid",
+    "timestamp",
+    "sender_information",
     "po_number"
   ],
   "title": "ExceptionResponse",

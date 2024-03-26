@@ -138,6 +138,16 @@
             }
           ],
           "title": "Underages"
+        },
+        "master_data_errors": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/MasterDataErrors"
+            },
+            {
+              "type": "null"
+            }
+          ]
         }
       },
       "title": "Exceptions",
@@ -164,6 +174,17 @@
           ],
           "default": null,
           "title": "Proposed Gln"
+        },
+        "resolution_request": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Resolution"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         }
       },
       "required": [
@@ -194,6 +215,17 @@
           ],
           "default": null,
           "title": "Proposed Gtin"
+        },
+        "resolution_request": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Resolution"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         }
       },
       "required": [
@@ -208,22 +240,30 @@
         "gln_errors": {
           "anyOf": [
             {
-              "$ref": "#/$defs/GLNError"
+              "items": {
+                "$ref": "#/$defs/GLNError"
+              },
+              "type": "array"
             },
             {
               "type": "null"
             }
-          ]
+          ],
+          "title": "Gln Errors"
         },
         "gtin_errors": {
           "anyOf": [
             {
-              "$ref": "#/$defs/GTINError"
+              "items": {
+                "$ref": "#/$defs/GTINError"
+              },
+              "type": "array"
             },
             {
               "type": "null"
             }
-          ]
+          ],
+          "title": "Gtin Errors"
         }
       },
       "title": "MasterDataErrors",
@@ -323,9 +363,17 @@
     }
   },
   "properties": {
-    "exception_uuid": {
-      "title": "Exception Uuid",
+    "message_uuid": {
+      "title": "Message Uuid",
       "type": "string"
+    },
+    "exception_case_uuid": {
+      "title": "Exception Case Uuid",
+      "type": "string"
+    },
+    "timestamp": {
+      "title": "Timestamp",
+      "type": "integer"
     },
     "po_number": {
       "title": "Po Number",
@@ -333,17 +381,6 @@
     },
     "sender_information": {
       "$ref": "#/$defs/ContactInformation"
-    },
-    "master_data_errors": {
-      "anyOf": [
-        {
-          "$ref": "#/$defs/MasterDataErrors"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": {}
     },
     "exceptions": {
       "anyOf": [
@@ -370,12 +407,19 @@
       ],
       "default": null,
       "title": "Other Errors"
+    },
+    "case_resolved": {
+      "title": "Case Resolved",
+      "type": "boolean"
     }
   },
   "required": [
-    "exception_uuid",
+    "message_uuid",
+    "exception_case_uuid",
+    "timestamp",
     "po_number",
-    "sender_information"
+    "sender_information",
+    "case_resolved"
   ],
   "title": "ExceptionReport",
   "type": "object"

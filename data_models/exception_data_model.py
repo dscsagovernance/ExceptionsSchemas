@@ -79,30 +79,35 @@ class GLNError(BaseModel):
     exception_item_uuid: str
     invalid_gln: str
     proposed_gln: Optional[str] = None
+    resolution_request: Optional[Resolution] = None 
 
 class GTINError(BaseModel):
     exception_item_uuid: str
     invalid_gtin: str
     proposed_gtin: Optional[str] = None
+    resolution_request: Optional[Resolution] = None
+
 
 class MasterDataErrors(TypedDict, total=False):
-    gln_errors: Optional[GLNError] = None
-    gtin_errors: Optional[GTINError] = None
+    gln_errors: Optional[List[GLNError]] = None
+    gtin_errors: Optional[List[GTINError]] = None
 
 class Exceptions(TypedDict, total=False):
     missing_data: Optional[List[ProductNoEPCISDescription]] = []
     missing_product: Optional[List[EPCISNoProductDescription]] = []
     overages: Optional[List[OveragesUnderages]] = []
     underages: Optional[List[OveragesUnderages]] = []
+    master_data_errors: Optional[MasterDataErrors] = {}
 
 class ExceptionReport(BaseModel):
     message_uuid: str
     exception_case_uuid: str
+    timestamp: int
     po_number: str
     sender_information: ContactInformation
-    master_data_errors: Optional[MasterDataErrors] = {}
     exceptions: Optional[Exceptions] = {}
     other_errors: Optional[List[str]] = None
+    case_resolved: bool
 
 
 
@@ -134,16 +139,18 @@ class ResponseItem(BaseModel):
     resolution_response: ResolutionResponse
     comments: Optional[str] = None
     alternative_resolution: Optional[AlternativeResolution] = None
-    
+    '''
     @field_validator('alternative_resolution')
     def ensure_alternative_or_followup(cls, v, values):
         if values.get('resolution_response') == ResolutionResponse.REJECT and not v:
             raise ValueError('If resolution is rejected, an alternative resolution or follow-up method and details must be provided.')
         return v
-
+    '''
 class ExceptionResponse(BaseModel):
     message_uuid: str
     exception_case_uuid: str  # Ties back to the original exception report
+    timestamp: int
+    sender_information: ContactInformation
     po_number: str  # Purchase order number for cross-reference
     response_items: Optional[List[ResponseItem]] = []
     additional_notes: Optional[str] = None
