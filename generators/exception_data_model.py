@@ -96,7 +96,8 @@ class Exceptions(TypedDict, total=False):
     underages: Optional[List[OveragesUnderages]] = []
 
 class ExceptionReport(BaseModel):
-    exception_uuid: str
+    message_uuid: str
+    exception_case_uuid: str
     po_number: str
     sender_information: ContactInformation
     master_data_errors: Optional[MasterDataErrors] = {}
@@ -141,7 +142,8 @@ class ResponseItem(BaseModel):
         return v
 
 class ExceptionResponse(BaseModel):
-    exception_uuid: str  # Ties back to the original exception report
+    message_uuid: str
+    exception_case_uuid: str  # Ties back to the original exception report
     po_number: str  # Purchase order number for cross-reference
     response_items: Optional[List[ResponseItem]] = []
     additional_notes: Optional[str] = None
