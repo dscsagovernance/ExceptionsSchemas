@@ -18,7 +18,7 @@ from pathlib import Path
 class ContactInformation(BaseModel):
     vp: Optional[str] = None
     gln: Optional[str] = None
-    email: Optional[str] = None
+    email: str
     phone: Optional[str] = None
 
     @model_validator(mode='before')
@@ -86,21 +86,21 @@ class GTINError(BaseModel):
     proposed_gtin: Optional[str] = None
 
 class MasterDataErrors(TypedDict, total=False):
-    gln_errors: GLNError
-    gtin_errors: GTINError
+    gln_errors: Optional[GLNError] = None
+    gtin_errors: Optional[GTINError] = None
 
 class Exceptions(TypedDict, total=False):
-    missing_data: List[ProductNoEPCISDescription]
-    missing_product: List[EPCISNoProductDescription]
-    overages: List[OveragesUnderages]
-    underages: List[OveragesUnderages]
+    missing_data: Optional[List[ProductNoEPCISDescription]] = []
+    missing_product: Optional[List[EPCISNoProductDescription]] = []
+    overages: Optional[List[OveragesUnderages]] = []
+    underages: Optional[List[OveragesUnderages]] = []
 
 class ExceptionReport(BaseModel):
     exception_uuid: str
     po_number: str
     sender_information: ContactInformation
-    master_data_errors: MasterDataErrors = {}
-    exceptions: Exceptions = {}
+    master_data_errors: Optional[MasterDataErrors] = {}
+    exceptions: Optional[Exceptions] = {}
     other_errors: Optional[List[str]] = None
 
 
@@ -143,7 +143,7 @@ class ResponseItem(BaseModel):
 class ExceptionResponse(BaseModel):
     exception_uuid: str  # Ties back to the original exception report
     po_number: str  # Purchase order number for cross-reference
-    response_items: List[ResponseItem]
+    response_items: Optional[List[ResponseItem]] = []
     additional_notes: Optional[str] = None
 
 

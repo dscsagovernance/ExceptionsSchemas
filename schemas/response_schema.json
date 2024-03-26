@@ -121,11 +121,19 @@
       "type": "string"
     },
     "response_items": {
-      "items": {
-        "$ref": "#/$defs/ResponseItem"
-      },
-      "title": "Response Items",
-      "type": "array"
+      "anyOf": [
+        {
+          "items": {
+            "$ref": "#/$defs/ResponseItem"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": [],
+      "title": "Response Items"
     },
     "additional_notes": {
       "anyOf": [
@@ -142,8 +150,7 @@
   },
   "required": [
     "exception_uuid",
-    "po_number",
-    "response_items"
+    "po_number"
   ],
   "title": "ExceptionResponse",
   "type": "object"

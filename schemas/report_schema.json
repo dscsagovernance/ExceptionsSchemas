@@ -27,16 +27,8 @@
           "title": "Gln"
         },
         "email": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Email"
+          "title": "Email",
+          "type": "string"
         },
         "phone": {
           "anyOf": [
@@ -51,6 +43,9 @@
           "title": "Phone"
         }
       },
+      "required": [
+        "email"
+      ],
       "title": "ContactInformation",
       "type": "object"
     },
@@ -89,32 +84,60 @@
     "Exceptions": {
       "properties": {
         "missing_data": {
-          "items": {
-            "$ref": "#/$defs/ProductNoEPCISDescription"
-          },
-          "title": "Missing Data",
-          "type": "array"
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/ProductNoEPCISDescription"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Missing Data"
         },
         "missing_product": {
-          "items": {
-            "$ref": "#/$defs/EPCISNoProductDescription"
-          },
-          "title": "Missing Product",
-          "type": "array"
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/EPCISNoProductDescription"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Missing Product"
         },
         "overages": {
-          "items": {
-            "$ref": "#/$defs/OveragesUnderages"
-          },
-          "title": "Overages",
-          "type": "array"
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/OveragesUnderages"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Overages"
         },
         "underages": {
-          "items": {
-            "$ref": "#/$defs/OveragesUnderages"
-          },
-          "title": "Underages",
-          "type": "array"
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/OveragesUnderages"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Underages"
         }
       },
       "title": "Exceptions",
@@ -183,10 +206,24 @@
     "MasterDataErrors": {
       "properties": {
         "gln_errors": {
-          "$ref": "#/$defs/GLNError"
+          "anyOf": [
+            {
+              "$ref": "#/$defs/GLNError"
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
         "gtin_errors": {
-          "$ref": "#/$defs/GTINError"
+          "anyOf": [
+            {
+              "$ref": "#/$defs/GTINError"
+            },
+            {
+              "type": "null"
+            }
+          ]
         }
       },
       "title": "MasterDataErrors",
@@ -298,17 +335,23 @@
       "$ref": "#/$defs/ContactInformation"
     },
     "master_data_errors": {
-      "allOf": [
+      "anyOf": [
         {
           "$ref": "#/$defs/MasterDataErrors"
+        },
+        {
+          "type": "null"
         }
       ],
       "default": {}
     },
     "exceptions": {
-      "allOf": [
+      "anyOf": [
         {
           "$ref": "#/$defs/Exceptions"
+        },
+        {
+          "type": "null"
         }
       ],
       "default": {}
