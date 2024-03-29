@@ -83,7 +83,7 @@
     },
     "Exceptions": {
       "properties": {
-        "missing_data": {
+        "missing_product_data": {
           "anyOf": [
             {
               "items": {
@@ -95,7 +95,7 @@
               "type": "null"
             }
           ],
-          "title": "Missing Data"
+          "title": "Missing Product Data"
         },
         "missing_product": {
           "anyOf": [

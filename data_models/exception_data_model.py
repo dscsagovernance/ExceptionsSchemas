@@ -93,7 +93,7 @@ class MasterDataErrors(TypedDict, total=False):
     gtin_errors: Optional[List[GTINError]] = None
 
 class Exceptions(TypedDict, total=False):
-    missing_data: Optional[List[ProductNoEPCISDescription]] = []
+    missing_product_data: Optional[List[ProductNoEPCISDescription]] = []
     missing_product: Optional[List[EPCISNoProductDescription]] = []
     overages: Optional[List[OveragesUnderages]] = []
     underages: Optional[List[OveragesUnderages]] = []

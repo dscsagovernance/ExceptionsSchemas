@@ -18,7 +18,7 @@ Uses Pydantic to build a JSON schema from a data model for exceptions https://do
     "phone": "123-456-7890"
   },
   "exceptions": {
-    "missing_data": [
+    "missing_product_data": [
       {
         "exception_item_uuid": "909df5e2-fb8a-5330-bd1a-dcd6efd658fa",
         "product_gtin": "12345678901234",

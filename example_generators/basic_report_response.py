@@ -70,7 +70,7 @@ master_data_errors = MasterDataErrors(
     gtin_errors=[gtin_error]
 )
 
-missing_data = ProductNoEPCISDescription(
+missing_product_data = ProductNoEPCISDescription(
     exception_item_uuid=pnd_uuid,
     product_gtin=invalid_gtin,
     observation_source=ObservationSource.PACKING_SLIP,
@@ -102,7 +102,7 @@ underages = OveragesUnderages(
 )
 
 exceptions = Exceptions(
-    missing_data=[missing_data],
+    missing_product_data=[missing_product_data],
     missing_product=[missing_product],
     overages=[overages],
     underages=[underages],
