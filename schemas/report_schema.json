@@ -49,6 +49,77 @@
       "title": "ContactInformation",
       "type": "object"
     },
+    "DataMisalignmentDescription": {
+      "properties": {
+        "exception_item_uuid": {
+          "title": "Exception Item Uuid",
+          "type": "string"
+        },
+        "received_product_gtin": {
+          "title": "Received Product Gtin",
+          "type": "string"
+        },
+        "received_product_lot": {
+          "title": "Received Product Lot",
+          "type": "string"
+        },
+        "received_product_expiry": {
+          "title": "Received Product Expiry",
+          "type": "string"
+        },
+        "received_product_serial": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Received Product Serial"
+        },
+        "product_data_gtin": {
+          "title": "Product Data Gtin",
+          "type": "string"
+        },
+        "product_data_lot": {
+          "title": "Product Data Lot",
+          "type": "string"
+        },
+        "product_data_expiry": {
+          "title": "Product Data Expiry",
+          "type": "string"
+        },
+        "product_data_serial": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Product Data Serial"
+        },
+        "resolution_request": {
+          "$ref": "#/$defs/Resolution"
+        }
+      },
+      "required": [
+        "exception_item_uuid",
+        "received_product_gtin",
+        "received_product_lot",
+        "received_product_expiry",
+        "received_product_serial",
+        "product_data_gtin",
+        "product_data_lot",
+        "product_data_expiry",
+        "product_data_serial",
+        "resolution_request"
+      ],
+      "title": "DataMisalignmentDescription",
+      "type": "object"
+    },
     "EPCISNoProductDescription": {
       "properties": {
         "exception_item_uuid": {
@@ -110,6 +181,20 @@
             }
           ],
           "title": "Missing Product"
+        },
+        "data_misalignment": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/DataMisalignmentDescription"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Data Misalignment"
         },
         "overages": {
           "anyOf": [

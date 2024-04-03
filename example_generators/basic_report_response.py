@@ -15,7 +15,7 @@ from data_models.exception_data_model import (
     ExceptionReport, ExceptionResponse, ContactInformation, ProductNoEPCISDescription,
     EPCISNoProductDescription, OveragesUnderages, Resolution, ObservationSource,
     ResolutionResponse, ResponseItem, AlternativeResolution, FollowUpMethod,
-    GLNError, GTINError, MasterDataErrors, Exceptions
+    GLNError, GTINError, MasterDataErrors, Exceptions, DataMisalignmentDescription
 )
 
 # Define the namespace (this could be one of the predefined ones or a custom UUID)
@@ -44,6 +44,13 @@ pnd_uuid = str(uuid.uuid5(namespace, str(random.random())))
 dnp_uuid = str(uuid.uuid5(namespace, str(random.random())))
 dnp_gtin = '01234567890123'
 dnp_serial = '12121212121212'
+ 
+dm_uuid = str(uuid.uuid5(namespace, str(random.random())))
+dm_gtin = '01234567890123'
+dm_recieved_serial = '121212121212'
+dm_data_serial = '232323232323'
+dm_expiry = '01012027'
+dm_lot = 'A1234'
 
 overage_uuid = str(uuid.uuid5(namespace, str(random.random())))
 overage_gtin = '23456789012345'
@@ -64,6 +71,19 @@ wholesaler_contact_info = ContactInformation(email="contact@wholesaler.com", vp=
 manufacturer_contact_info = ContactInformation(email="contact@manufacturer.com", vp="jwt...", gln="1234567890124", phone="123-456-7891")
 gln_error = GLNError(exception_item_uuid=gln_uuid, invalid_gln=invalid_gln, proposed_gln=new_gln)
 gtin_error = GTINError(exception_item_uuid=gtin_uuid, invalid_gtin=invalid_gtin, proposed_gtin=new_gtin)
+
+data_misalignment = DataMisalignmentDescription(
+    exception_item_uuid=dm_uuid,
+    received_product_gtin=dm_gtin,
+    received_product_lot=dm_lot,
+    received_product_expiry=dm_expiry,
+    received_product_serial=dm_recieved_serial,
+    product_data_gtin=dm_gtin,
+    product_data_lot=dm_lot,
+    product_data_expiry=dm_expiry,
+    product_data_serial=dm_data_serial,
+    resolution_request=Resolution.SEND_DATA
+)
 
 master_data_errors = MasterDataErrors(
     gln_errors=[gln_error],
@@ -104,6 +124,7 @@ underages = OveragesUnderages(
 exceptions = Exceptions(
     missing_product_data=[missing_product_data],
     missing_product=[missing_product],
+    data_misalignment=[data_misalignment],
     overages=[overages],
     underages=[underages],
     master_data_errors = master_data_errors
@@ -137,6 +158,12 @@ dnp_response_item = ResponseItem(
     )
 )
 
+dm_response_item = ResponseItem(
+    exception_item_uuid=dm_uuid,
+    resolution_response=ResolutionResponse.ACCEPT,
+    comments="Sent updated EPCIS",
+)
+
 
 overage_response_item = ResponseItem(
     exception_item_uuid=overage_uuid,
@@ -168,7 +195,7 @@ exception_response = ExceptionResponse(
     timestamp=response_time,
     sender_information=manufacturer_contact_info,
     po_number=po_number,
-    response_items=[pnd_response_item, dnp_response_item, overage_response_item, underage_response_item, gln_response_item, gtin_response_item],
+    response_items=[pnd_response_item, dnp_response_item, dm_response_item, overage_response_item, underage_response_item, gln_response_item, gtin_response_item],
     additional_notes="All issues have been reviewed. Did not accept the data no product issue"
 )
 

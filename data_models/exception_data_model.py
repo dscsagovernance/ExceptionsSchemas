@@ -53,6 +53,17 @@ class ObservationSource(Enum):
     ASN = "ASN"
     OTHER = "Other"
 
+class DataMisalignmentDescription(BaseModel):
+    exception_item_uuid: str
+    received_product_gtin: str
+    received_product_lot: str
+    received_product_expiry: str
+    received_product_serial: Optional[str]
+    product_data_gtin: str
+    product_data_lot: str
+    product_data_expiry: str
+    product_data_serial: Optional[str]
+    resolution_request: Resolution
 
 class ProductNoEPCISDescription(BaseModel):
     exception_item_uuid: str
@@ -95,6 +106,7 @@ class MasterDataErrors(TypedDict, total=False):
 class Exceptions(TypedDict, total=False):
     missing_product_data: Optional[List[ProductNoEPCISDescription]] = []
     missing_product: Optional[List[EPCISNoProductDescription]] = []
+    data_misalignment: Optional[List[DataMisalignmentDescription]] = []
     overages: Optional[List[OveragesUnderages]] = []
     underages: Optional[List[OveragesUnderages]] = []
     master_data_errors: Optional[MasterDataErrors] = {}
