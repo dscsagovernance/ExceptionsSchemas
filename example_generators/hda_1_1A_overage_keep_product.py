@@ -25,18 +25,19 @@ namespace = uuid.NAMESPACE_DNS
 # Define the name (this is a string that you provide)
 
 
-
+# Define case numbers
 case_uuid = str(uuid.uuid5(namespace, str(random.random())))
 report_time = int(time.time())
 response_time = report_time + 3600
 report_2_time = response_time + 3600
-po_number = 'PO123456789'
+po_number = 'ABD1234'
 
+# define product information
 overage_uuid = str(uuid.uuid5(namespace, str(random.random())))
 overage_gtin = '23456789012345'
 
+# define message identifiers
 report_message_uuid = str(uuid.uuid5(namespace, str(random.random())))
-po_number = 'ABD1234'
 
 response_message_uuid = str(uuid.uuid5(namespace, str(random.random())))
 
@@ -109,3 +110,10 @@ with open(os.path.join('examples', 'hda_1_1A_overage_keep_product_response.json'
 
 with open(os.path.join('examples', 'hda_1_1A_overage_keep_product_report_2.json'), 'w') as f:
     f.write(exception_report_2.model_dump_json())
+
+print(exception_report)
+print('==========================')
+print(exception_response)
+
+print('==========================')
+print(exception_report_2)
